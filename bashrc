@@ -75,6 +75,6 @@ cd() {
 
 #---------- TMUX -----------#
 if [ -t 0 ] && [[ -z $TMUX ]] && [[ $- = *i* ]]; then 
-  exec tmux new -t basique; 
+  exec tmux new -A -s basique; 
 fi
 #---------------------------#
