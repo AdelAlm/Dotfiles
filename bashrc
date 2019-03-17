@@ -53,7 +53,7 @@ export HISTIGNORE='ls:ll:ls -alh:pwd:clear:history' # ignore more
 alias hh=hstr # Ctrl + r with hstr
 export HISTFILE=~/.bash_history
 export HSTR_CONFIG=hicolor
-bind '"\C-r": "\e0ihstr -- \C-j"'
+if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 #---------------------------#
 
 #----------- SSH -----------#
