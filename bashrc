@@ -43,10 +43,13 @@ alias ll="ls -laF"
 alias grep='grep --color=auto'
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
 #---------------------------#
 
 #--------- HISTORY ---------#
-export HISTSIZE=5000
+export HISTSIZE=10000
 export HISTTIMEFORMAT='%d/%m %T '
 export HISTCONTROL=ignoreboth # ignore redundant or space commands
 export HISTIGNORE='ls:ll:ls -alh:pwd:clear:history' # ignore more

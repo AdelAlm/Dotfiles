@@ -1,9 +1,14 @@
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
 " Non compatible avec Vi
 set nocompatible
 
 " Syntaxe et thème
 syntax on
-colorscheme Tomorrow-Night-Bright
+colorscheme torte
 set t_Co=256
 
 " Num ligne et colonne, et commande
@@ -46,9 +51,6 @@ set hidden
 " Montre le mode
 set showmode
 
-" Montrer ligne en cours
-set cursorline
-
 " Toujours afficher barre d'etat
 set laststatus=2
 
@@ -61,7 +63,7 @@ set showmatch
 set clipboard=unnamed
 set mouse=a
 
-" recherche incrémentale
+" Recherche incrémentale
 set hlsearch
 set incsearch
 
