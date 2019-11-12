@@ -15,34 +15,19 @@ fi
 # navigation
 alias ..="cd .."
 alias ...="cd ../.."
-alias -- -="cd -"
 
 # cleaner
 alias q='exit'
 alias c='clear'
 alias o='open'
-alias h='history'
-
-# git
 alias g='git'
-alias gsta='git status'
-alias gcom='git commit'
-alias gclo='git clone'
-alias glog='git log --oneline'
-alias gadd.='git add .'
-alias gaddp='git add -p'
-alias gdiff='git diff'
-
-# edition
 alias v='vim'
-alias vimrc='vim ~/.vimrc'
-alias bashrc='vim ~/.bashrc'
-
-# others
 alias ll="ls -laF"
 alias grep='grep --color=auto'
-alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias open='xdg-open'
+
+alias uencode="python3 -c 'import sys; import urllib.parse; print(urllib.parse.quote_plus(sys.argv[1]));'"
+alias udecode="python3 -c 'import sys; import urllib.parse; print(urllib.parse.unquote_plus(sys.argv[1]));'"
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -82,3 +67,18 @@ if [ -t 0 ] && [[ -z $TMUX ]] && [[ $- = *i* ]]; then
   tmux new -A -s basique
 fi
 #---------------------------#
+
+# HSTR configuration - add this to ~/.bashrc
+alias hh=hstr                    # hh to be alias for hstr
+export HSTR_CONFIG=hicolor       # get more colors
+shopt -s histappend              # append new history items to .bash_history
+export HISTCONTROL=ignorespace   # leading space hides commands from history
+export HISTFILESIZE=10000        # increase history file size (default is 500)
+export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+# ensure synchronization between Bash memory and history file
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
+if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
+# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
+if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
+
