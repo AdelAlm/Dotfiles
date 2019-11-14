@@ -1,0 +1,3 @@
+#!/bin/bash
+
+(ip addr show dev tun0 || ip addr show enp0s3) | grep 'inet ' | awk '{print $2}'
