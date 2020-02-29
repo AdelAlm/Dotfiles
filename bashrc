@@ -82,3 +82,34 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
 if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
+# docker
+alias dockershell="sudo docker run --rm -i -t --entrypoint=/bin/bash"  
+alias dockershellsh="sudo docker run --rm -i -t --entrypoint=/bin/sh"
+
+function dockershellhere() {  
+  dirname=${PWD##*/}
+  sudo docker run --rm -it --entrypoint=/bin/bash -v `pwd`:/${dirname} -w /${dirname} "$@"
+}
+function dockershellshhere() {  
+  dirname=${PWD##*/}
+  sudo docker run --rm -it --entrypoint=/bin/sh -v `pwd`:/${dirname} -w /${dirname} "$@"
+}
+
+nginxhere() {
+  sudo docker run --rm -it -p 80:80 -p 443:443 -v "${PWD}:/srv/data" nginxserver
+}
+
+metasploit() {
+  sudo docker run --rm -it -v "${HOME}/.msf4:/home/msf/.msf4" metasploitframework/metasploit-framework ./msfconsole "$@"
+}
+
+metasploitports() {
+  sudo docker run --rm -it -v "${HOME}/.msf4:/home/msf/.msf4" -p 10000-10010:10000-10010 metasploitframework/metasploit-framework ./msfconsole "$@"
+}
+
+msfvenom() {
+  sudo docker run --rm -it -v "${HOME}/.msf4:/home/msf/.msf4" -v "${PWD}:/data" metasploitframework/metasploit-framework ./msfvenom "$@"
+}
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
